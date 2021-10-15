@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.views import View
 from . import forms
 from django.contrib.auth.models import auth,User
-import credentials
+import dbinfo
 import gridfs
 import base64
 from bson.objectid import ObjectId
@@ -10,10 +10,10 @@ from bson.objectid import ObjectId
 
 class HomePage(View):
     def get(self,request):
-        collection = credentials.database['product_details']
+        collection = dbinfo.database['product_details']
         
         data = list()
-        fs = gridfs.GridFS(credentials.database)
+        fs = gridfs.GridFS(dbinfo.database)
         for item in collection.find():
             image_path = fs.get(ObjectId(item['image_id']))
            

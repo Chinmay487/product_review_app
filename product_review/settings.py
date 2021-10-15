@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-import credentials # Created credentials.py file in base directory and putted database related credentials there
+import dbinfo # Created dbinfo.py file in base directory and putted database related dbinfo there
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -81,10 +81,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'CLIENT':{
-            'name':credentials.database_name,
-            'host':credentials.mongo_atlas_url,
-            'username':credentials.user_name,
-            'password':credentials.password,
+            'name':dbinfo.database_name,
+            'host':dbinfo.mongo_atlas_url,
+            'username':dbinfo.user_name,
+            'password':dbinfo.password,
             'authMechanism':'SCRAM-SHA-1',
         },
     }

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from . import forms
-import credentials
+import dbinfo
 import gridfs
 import string
 import random
@@ -22,7 +22,7 @@ class NewProduct(View):
 
     def get_random_string(self):
         length = 10
-        collection = credentials.database['fs.files']
+        collection = dbinfo.database['fs.files']
         chars = string.ascii_letters + '0123456789'
         while True:
             file_name = ''.join(random.choices(chars, k=length))
@@ -39,8 +39,8 @@ class NewProduct(View):
         file_name = f"{uid}.{extension}"
 
         print(file_name)
-        collection = credentials.database["product_details"]
-        fs = gridfs.GridFS(credentials.database)
+        collection = dbinfo.database["product_details"]
+        fs = gridfs.GridFS(dbinfo.database)
         file_id = fs.put(image, filename=file_name)
         new_product = {
             "product_name": request.POST["product_name"],
@@ -56,8 +56,8 @@ class NewProduct(View):
 
 class ProductInfo(View):
     def get(self, request):
-        collection = credentials.database['product_details']
-        fs = gridfs.GridFS(credentials.database)
+        collection = dbinfo.database['product_details']
+        fs = gridfs.GridFS(dbinfo.database)
         uid = request.GET['uid']
         product_info = collection.find_one({'uid': uid})
         image_id = product_info['image_id'] 
@@ -74,7 +74,7 @@ class ProductInfo(View):
 
 class NewReview(View):
     def post(self,request):
-        collection = credentials.database['product_details']
+        collection = dbinfo.database['product_details']
         uid = request.POST['uid']
         user_name = request.user.username,
         rating = request.POST['rating']
