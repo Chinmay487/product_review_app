@@ -105,21 +105,3 @@ class NewReview(View):
         return redirect('/')
 
 
-# {
-#     'uid':{
-#         'user_1':{
-#             'rating':3,
-#             'feedback':'sdfdfsd'
-#         }
-#     }
-# }
-
-# {
-#     "_id": {"$oid": "616058bfa1199fe3d117c2d9"}, 
-#     "product_name": "Dosa", 
-#     "price": "999999",
-#     "description": "This is best dosa in the world including gold dust",
-#      "image_id": {"$oid": "616058bea1199fe3d117c2d7"}, 
-#      "uid": "ucyt2mPRNZ"
-# }
-

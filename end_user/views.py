@@ -66,15 +66,15 @@ class SignupUser(View):
         user_name = request.POST['user_name']
         email = request.POST['email']
         password = request.POST['password']
-        confirmed_password = request.POST['confirmed_password']
+        # confirmed_password = request.POST['confirmed_password']
 
-        if password == confirmed_password:
-            new_user = User.objects.create_user(
-                username = user_name,
-                password = password,
-                email = email
-            )
-            new_user.save()
+        # if password == confirmed_password:
+        new_user = User.objects.create_user(
+            username = user_name,
+            password = password,
+            email = email
+        )
+        new_user.save()
 
         return redirect('/login')
 
